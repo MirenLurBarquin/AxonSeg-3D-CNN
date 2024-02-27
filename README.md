@@ -6,4 +6,6 @@ The aim of this project was to explore and analyze the 3D microstructure of the 
 
 The report concentrated on analyzing and preparing volumetric image data, creating a framework to train and evaluate the **3D U-Net** model and the concept of **Cross-hair filters** for segmenting axons, and gaining insights into the shape of predicted axons. The main goal is to accurately label axonal structures within the provided data volumes.
 
+
+In this repository: 
 * **THESIS_compressed.pdf:** full report in a compressed format that may involve lower image quality. 
