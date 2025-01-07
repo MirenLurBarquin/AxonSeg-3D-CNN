@@ -2,7 +2,11 @@
 # pyton train.py
 
 # Import the necessary packages
+from dotenv import load_dotenv
 import os
+
+load_dotenv()  # Load variables from .env
+
 import pickle
 import time
 import random
@@ -315,8 +319,8 @@ def make_prediction(model, subject, loss_fn, aggr: bool=False):
 if __name__=='__main__':
     rnd_id = random.randint(3999,4999)
     run = neptune.init_run(
-    project="dtu-msc-thesis/msc-project",
-    api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI4YzU1ODNmOC0wNDI1LTQwOGEtYTA5YS03M2I2MDBmZGVjOGYifQ==",
+    project=os.getenv("NEPTUNE_PROJECT"),
+    api_token=os.getenv("NEPTUNE_TOKEN"),
     source_files = ["config128_bs9_20.py", "jobfile_gpu.sh", "train128_gen_20.py"])
  
     params = {"file":"train_64_gen_80_CH3", "rnd_id": rnd_id, "num_epoch": config.NUM_EPOCHS, "batch_size": config.BATCH_SIZE, "num_workers":config.NUM_WORKERS, "learning_rate": config.INIT_LR, "optimizer": "Adam", "device": config.DEVICE, "patch_size": config.PATCH_SIZE, "samples_per_volume": config.SAMPLES_PER_VOLUME, "max_queue_length": config.MAX_QUEUE_LENGTH, "loss": config.NAME_LOSS, "CH":config.CH, "kernel_size":config.K}

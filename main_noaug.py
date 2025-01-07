@@ -1,5 +1,9 @@
 # Import the necessary packages
+from dotenv import load_dotenv
 import os
+
+load_dotenv()  # Load variables from .env
+
 import pickle
 import time
 import random
@@ -268,8 +272,8 @@ def make_prediction(model, test_subjects_dataset, loss_fn, rnd_id):
 if __name__ == '__main__':
     rnd_id = random.randint(1000, 1999)
     run = neptune.init_run(
-        project="dtu-msc-thesis/msc-project",
-        api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI4YzU1ODNmOC0wNDI1LTQwOGEtYTA5YS03M2I2MDBmZGVjOGYifQ==",
+        project=os.getenv("NEPTUNE_PROJECT"),
+        api_token=os.getenv("NEPTUNE_TOKEN"),
         source_files=["config.py", "jobfile_gpu.sh", "main_noaug.py"])
 
     params = {"file": "main_noaug", "patch_size": config.PATCH_SIZE, "rnd_id": rnd_id, "num_epoch": config.NUM_EPOCHS, "batch_size": config.BATCH_SIZE, "num_workers": config.NUM_WORKERS, "learning_rate": config.INIT_LR, "optimizer": "Adam", "device": config.DEVICE, "samples_per_volume": config.SAMPLES_PER_VOLUME, "max_queue_length": config.MAX_QUEUE_LENGTH, "loss": config.NAME_LOSS, "CH": config.CH, "kernel_size": config.K}

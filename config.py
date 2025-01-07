@@ -1,4 +1,7 @@
+from dotenv import load_dotenv
 import os
+
+load_dotenv()  # Load variables from .env
 
 import numpy as np
 import torch
@@ -10,7 +13,7 @@ from utils.MaskedGeneralizedDiceCELoss import MaskedGeneralizedDiceCELoss
 from utils.MaskedGeneralizedDiceLoss import MaskedGeneralizedDiceLoss
 
 # base path of the dataset
-DATASET_PATH = os.path.join("/work3/s210289/msc_thesis/data", "volumes")
+DATASET_PATH = os.getenv("DATASET_PATH")
 
 # define the path to the images and masks dataset
 IMG_NAME = 'downsampledR1.nii'
